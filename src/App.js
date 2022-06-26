@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+import Navbar from "./components/navbar.component";
+import Archive from "./pages/archive.page";
+import Reminders from "./pages/reminders.page";
+import Notes from "./pages/notes.page";
+import Trash from "./pages/trash.page";
+
+const App = () => {
+  const [view, setView] = useState(1);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar view={view} setView={setView} />
+      {view === 1 ? (
+        <Notes />
+      ) : view === 2 ? (
+        <Reminders />
+      ) : view === 3 ? (
+        <Archive />
+      ) : view === 4 ? (
+        <Trash />
+      ) : (
+        ""
+      )}
     </div>
   );
-}
+};
 
 export default App;
