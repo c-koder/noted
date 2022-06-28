@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import Note from "../components/note.component";
 
-const Trash = () => {
+const Trash = ({ pad }) => {
   const CommonRepository = require("../repositories/common.repository");
 
   const [trashNotes, setTrashNotes] = useState([]);
 
-  const addNote = (note) => {
-    CommonRepository.addNote(1, note, "notes").then(
+  const addNote = (note, path) => {
+    CommonRepository.addNote(pad, note, path).then(
       (response) => response.msg === "success" && deleteNote(note)
     );
   };
 
   const deleteNote = (note) => {
-    CommonRepository.deleteNote(1, note.id, "trash").then((response) => {
+    CommonRepository.deleteNote(pad, note.id, "trash").then((response) => {
       response === "success" &&
         setTrashNotes(trashNotes.filter((item) => item.id !== note.id));
     });
   };
 
   useEffect(() => {
-    CommonRepository.getNotes(1, "trash")
+    CommonRepository.getNotes(pad, "trash")
       .then((response) => {
         setTrashNotes(response);
       })

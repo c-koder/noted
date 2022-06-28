@@ -10,6 +10,7 @@ const Note = ({
   addNote,
   updateNote,
   deleteNote,
+  archiveNote,
 }) => {
   const [title, setTitle] = useState(note.title);
   const [desc, setDesc] = useState(note.note);
@@ -57,6 +58,23 @@ const Note = ({
             {note.note}
           </div>
         )}
+        {note.time && (
+          <div
+            style={{
+              marginTop: 10,
+              width: "fit-content",
+              fontSize: 13,
+              fontWeight: 600,
+              backgroundColor: "rgba(var(--dark-rgb), 0.1)",
+              color: "rgba(var(--dark-rgb), 0.75)",
+              padding: "4px 8px",
+              borderRadius: 3,
+            }}
+          >
+            <i className="fa fa-clock-o" style={{ marginRight: 5 }}></i>
+            {note.time}
+          </div>
+        )}
         {!note.title && !note.note && (
           <span style={{ color: "var(--dark)", fontSize: 18 }}>Empty Note</span>
         )}
@@ -97,7 +115,7 @@ const Note = ({
             type="button"
             style={{ all: "unset" }}
             onClick={() => {
-              deleteNote(note.id);
+              archiveNote(note);
             }}
           >
             <span data-tip="Archive">
@@ -109,7 +127,10 @@ const Note = ({
             type="button"
             style={{ all: "unset" }}
             onClick={() => {
-              addNote(note);
+              addNote(
+                note,
+                note.isNote ? "notes" : note.isReminder && "reminders"
+              );
             }}
           >
             <span data-tip="Revert">
@@ -120,16 +141,16 @@ const Note = ({
         <button
           type="button"
           style={{ all: "unset" }}
-          onClick={() =>
-            isTrash ? setOpenDeletePopup(true) : deleteNote(note)
-          }
+          onClick={() => {
+            isTrash || isArchive ? setOpenDeletePopup(true) : deleteNote(note);
+          }}
         >
           <span data-tip="Delete" style={{ fontSize: 16 }}>
             <i className="fa fa-trash"></i>
           </span>
         </button>
       </div>
-      {isTrash && (
+      {(isTrash || isArchive) && (
         <Popup
           open={openDeletePopup}
           modal

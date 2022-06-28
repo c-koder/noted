@@ -1,8 +1,7 @@
-const Colors = ({ id, colors, selected, setSelected }) => {
+const Colors = ({ colors, selected, setSelected }) => {
   return (
     <div
-      className="dropdown-menu colors-dropdown"
-      aria-labelledby={id || "colorsDropdown"}
+      className="dropdown-menu custom-dropdown"
       onClick={(e) => e.stopPropagation()}
     >
       <ul className="color-palette">
