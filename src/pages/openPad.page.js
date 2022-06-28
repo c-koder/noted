@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import RecentPad from "../components/recentPad.component";
 
-const PairPad = ({ openPad, recentPads }) => {
+const OpenPad = ({ openPad, recentPads }) => {
   const PadRepository = require("../repositories/pad.repository");
 
   const [number, setNumber] = useState("");
@@ -76,7 +76,7 @@ const PairPad = ({ openPad, recentPads }) => {
       <div className="pad-wrapper">
         <div className="pad-cont">
           <img src={logo} className="logo" alt="logo" />
-          <h1 className="title">{newPad ? "Create a Pad" : "Pair a Pad"}</h1>
+          <h1 className="title">{newPad ? "Create a Pad" : "Open a Pad"}</h1>
           <hr />
           {newPad ? (
             loading ? (
@@ -172,8 +172,8 @@ const PairPad = ({ openPad, recentPads }) => {
                 onClick={handlePair}
                 disabled={loading}
               >
-                <i className="fa fa-chain"></i>
-                {loading ? "Pairing" : "Pair"}
+                <i className="fa fa-folder-open"></i>
+                {loading ? "Opening" : "Open"}
               </button>
               <br />
               {recentPads.length > 0 && (
@@ -235,4 +235,4 @@ const PairPad = ({ openPad, recentPads }) => {
   );
 };
 
-export default PairPad;
+export default OpenPad;

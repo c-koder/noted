@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Navbar from "./components/navbar.component";
 import Archive from "./pages/archive.page";
-import PairPad from "./pages/pairPad.page";
+import OpenPad from "./pages/openPad.page";
 import Notes from "./pages/notes.page";
 import Trash from "./pages/trash.page";
 
@@ -62,7 +62,7 @@ const App = () => {
       )}
     </div>
   ) : (
-    <PairPad openPad={openPad} recentPads={recentPads} />
+    <OpenPad openPad={openPad} recentPads={recentPads} />
   );
 };
 
